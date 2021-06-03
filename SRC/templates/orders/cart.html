@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+| Cart
+  
+{% endblock title %}
+
+{% block content %}
+<div class="my-form container p-5 my-5 rounded border border-warning">
+        
+    <h2 class="text-center">Cart</h2>
+    <hr>
+    {% if not request.user.is_authenticated or request.user.is_anonymous %}
+    <h5 clas="alert alert-danger"> You must be <a style="color:#dc3545;"  href="{% url 'signin' %}" class="tex-dark"> logged in </a></h5>
+
+    {% elif order %}
+    <h5>
+        Full Name: {{order.user.first_name|add:' '|add:order.user.last_name}}
+        <hr>
+        
+    </h5>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <div class="row">
+              <div class="col-6">
+                   <em>Order Number</em>
+              </div>
+              
+              <div class="col-6 text-right">
+                   <strong>{{order.id}}</strong>
+              </div>
+         </div>
+      </li>      
+      <li class="list-group-item">
+           <div class="row">
+                <div class="col-6">
+                     <em>Products count</em>
+                </div>
+
+                <div class="col-6 text-right">
+                     <strong>{{orderdetails.count}} </strong>
+                </div>
+           </div>
+      </li>      
+      <li class="list-group-item">
+           <div class="row">
+                <div class="col-6">
+                     <em>Total</em>
+                </div>
+
+                <div class="col-6 text-right">
+                     <strong>$ {{total}}</strong>
+                </div>
+           </div>
+      </li>      
+    </ul>
+    <hr>
+    <table class="table table-hover ">
+        <thead >            
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Product</th>
+            <th scope="col">Image</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Price</th>
+            <th scope="col">Sub Total</th>
+          </tr>        
+        </thead>
+        <tbody>
+        {% for line in orderdetails %}   
+          <tr >
+            <th scope="row" >{{forloop.counter}}</th>
+            <td>{{line.product.PrdName}}</td>
+            <td><img src="{{line.product.PrdImage.url}}" style="width:80px;height:80px" alt=""></td>
+            <td>
+                <a href="{% url 'sub_qty' orderdetails_id=line.id %}" class="btn btn-outline-warning btn-sm">-</a>
+                {{line.quantity}}
+                <a href="{% url 'add_qty' orderdetails_id=line.id %}" class="btn btn-outline-warning btn-sm">+</a>
+            </td>
+            <td>{{line.price}}</td>
+            <td style="font-weight:bold; color:darkred;">{% widthratio line.quantity 1 line.price %}</td>
+            <td>
+                <a href="{% url 'remove_from_cart' orderdetails_id=line.id %}" class="btn btn-outline-danger btn-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-x-fill" viewBox="0 0 16 16">
+                        <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM7.354 5.646 8.5 6.793l1.146-1.147a.5.5 0 0 1 .708.708L9.207 7.5l1.147 1.146a.5.5 0 0 1-.708.708L8.5 8.207 7.354 9.354a.5.5 0 1 1-.708-.708L7.793 7.5 6.646 6.354a.5.5 0 1 1 .708-.708z"/>
+                      </svg>
+                    Remove
+                </a>
+            </td>
+          
+        </tr>
+          {% empty %}
+          <h5 class="alert alert-warning">
+              No details her
+          </h5>
+        {% endfor %}          
+        </tbody>
+      </table>
+
+    {% else %}
+    <h5 class="alert alert-warning">No order here</h5>
+      
+    {% endif %}
+
+    <hr>
+</div>
+{% endblock content %}

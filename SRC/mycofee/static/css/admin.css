@@ -1,0 +1,48 @@
+
+#header{
+    background:#5A020Cce;
+}
+
+
+#branding h1{
+    color:#fff;
+}
+
+.module caption, .inline-group h2{
+    background:#71131Eee;
+}
+
+#user-tools{
+    color:#fff;
+}
+
+
+.button, 
+input[type=submit], 
+input[type=button], 
+.button, 
+input[type=submit], 
+input[type=button], 
+.button, 
+input[type=submit], 
+input[type=button],
+.submit-row input.default{
+    background:#c54d5bee;
+
+}
+
+.button:active, 
+input[type=submit]:active, 
+input[type=button]:active, 
+.button:focus, 
+input[type=submit]:focus, 
+input[type=button]:focus, 
+.button:hover, 
+input[type=submit]:hover, 
+input[type=button]:hover,
+.submit-row input.default:hover{
+    background:#6d0612ee;
+}
+
+
+.button.default, input[type=submit].default, 

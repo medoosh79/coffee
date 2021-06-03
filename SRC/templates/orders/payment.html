@@ -1,0 +1,211 @@
+{% extends "base.html" %}
+{% load static %}
+
+<body>
+   {% block content %}
+   
+    <div class="my-form container p-5 my-5 rounded border border-warning">
+        
+            <h2 class="text-center">Checkout</h2>
+            <hr>
+            {% if not request.user.is_authenticated or request.user.is_anonymous %}
+            <h5 class="alert alert-warning"> You must be <a href="#mySignin" class="text-dark">Logged in</a></h5>
+            {% include "partials/_alerts.html" %}
+            {% else %}
+                <form method="POST">
+                
+                    {% csrf_token %}
+                    {% include "partials/_alerts.html" %}
+                    <div class="form-group">
+                        <div class="contact-us">
+                        <div class="contact-form">
+                            
+                                <div class="row">
+                                        <div class="col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Title:</label>
+                                                <select class="form-control" data-msg-required="This field is required.">
+                                                    <option value="">-- Choose --</option>
+                                                    <option value="dr">Dr.</option>
+                                                    <option value="miss">Miss</option>
+                                                    <option value="mr">Mr.</option>
+                                                    <option value="mrs">Mrs.</option>
+                                                    <option value="ms">Ms.</option>
+                                                    <option value="other">Other</option>
+                                                    <option value="prof">Prof.</option>
+                                                    <option value="rev">Rev.</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Name:</label>
+                                                <input type="text" class="form-control" name="fname">
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="row">
+                                        <div class="col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Email:</label>
+                                                <input type="text" class="form-control" name="email">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Phone:</label>
+                                                <input type="text" class="form-control" name="mobile">
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="row">
+                                        <div class="col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Address 1:</label>
+                                                <input type="text" class="form-control" name="address1">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Address 2:</label>
+                                                <input type="text" class="form-control"name="address2">
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="row">
+                                        <div class="col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label">City:</label>
+                                                <input type="text" class="form-control" name="city">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label">State:</label>
+                                                <input type="text" class="form-control"name="state">
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="row">
+                                        <div class="col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Zip:</label>
+                                                <input type="text" class="form-control" name="zip">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Country:</label>
+                                                <select class="form-control">
+                                                    <option value="">-- Choose --</option>
+                                                    <option value="">-- Choose --</option>
+                                                    <option value="">-- Choose --</option>
+                                                    <option value="">-- Choose --</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                </div>
+
+                                <div class="row">
+                                        <div class="col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Payment method</label>
+
+                                                <select class="form-control">
+                                                    <option value="">-- Choose --</option>
+                                                    <option value="bank">Bank account</option>
+                                                    <option value="cash">Cash</option>
+                                                    <option value="paypal">PayPal</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Captcha</label>
+                                                <input type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                </div>
+
+                                <div class="clearfix">
+                                        <button type="button" class="filled-button pull-left">Back</button>
+                                        
+                                        <button type="submit" class="filled-button pull-right">Finish</button>
+                                </div>
+                            
+                        </div>
+                        </div>
+                    </div>
+                            
+                </form>
+            {% endif %} 
+    </div>
+ <!-- Sign in Modal -->
+ <div id="mySignin" class="modal styled hide fade" tabindex="-1" role="dialog" aria-labelledby="mySigninModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">        
+            <h4 id="mySigninModalLabel">Login to your <strong>account</strong></h4>
+            <button  class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+          <div class="my-form container p-5 my-5 rounded border border-warning">
+          
+            <h2 class="text-center">Sign In</h2>
+            <hr>
+          
+            {% if request.user.is_authenticated %}
+                {% include "partials/_alerts.html" %}
+            {% else %}
+            
+            <form action="{% url 'signin' %}" method="POST">
+                {% csrf_token %}
+            {% include "partials/_alerts.html" %}
+            <div class="form-group">
+                <label for="inputUsername">Username</label>
+                <input type="text" class="form-control" name="user" id="inputUsername" placeholder="" required>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword">Password</label>
+                <input type="password" class="form-control" name="pass" id="inputPassword" required>
+            </div>
+
+            <div class="form-group">
+                <div class="pretty p-svg p-curve p-jelly">
+                    <input type="checkbox" name="terms" id="inputTerms" />
+                    <div class="state p-warning">
+                        <!-- svg path -->
+                        <svg class="svg svg-icon" viewBox="0 0 20 20">
+                            <path d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z" style="stroke: white;fill:white;"></path>
+                        </svg>
+                        <label>Remember Me</label>
+                    </div>
+                </div>
+            </div>
+            
+            <button type="submit" name="btnsignip" class="btn btn-warning">Login</button>
+        </div>
+        
+        <div class="modal-footer">
+          
+          <p class="aligncenter margintop20">
+            Forgot password? <a href="#myReset" data-dismiss="modal" aria-hidden="true" data-toggle="modal">Reset</a>
+          </p>
+        </div>
+        </form>
+        <!-- end signin modal -->
+        {% endif %} 
+   
+        </div>
+      </div>
+    </div>
+  </div>
+
+   {% endblock content %} 
+
+    
+    
+</body>

@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% load static %}
+
+<body>
+   {% block content %}
+    <div class="my-form container p-5 my-5 rounded border border-warning">
+        <form method='post' enctype="multipart/form-data">
+            {% csrf_token %}
+        {% if request.user.is_authenticated %}              
+            
+                <h2 class="text-center">Profile Edite</h2>
+                <hr>
+                
+                <div class="" >
+                    <!--<img src="{{image.url}}" class="card-img-top" alt="..." >-->
+                    <img src="{{image.url}}" name="image"  class=" rounded-circle account-img" alt="..."  style="width: 13rem;" value={{image}}>
+                    <div class="form-row field-profile_pic">
+                        
+                        <div class=" mt-3">            
+                                            
+                            <label for="id_profile_pic">Profile Pic:</label>                                           
+                            
+                            <input type="file" name="image2" accept="image/*" ></p>       
+                                        
+                        </div>
+                    </div>         
+                </div>          
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputFirstName">First Name</label>
+                        <input type="text" class="form-control" name= "fname" id="inputFirstName" required value={{fname}}>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputLastName">Last Name</label>
+                        <input type="text" class="form-control" name="lname" id="inputLastName" required value={{lname}}>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputAddress">Address</label>
+                    <input type="text" class="form-control" name="address" id="inputAddress" placeholder="1234 Main St" required value={{address}}>
+                </div>
+                <div class="form-group">
+                    <label for="inputAddress2">Address 2</label>
+                    <input type="text" class="form-control" name="address2" id="inputAddress2" placeholder="Apartment, studio, or floor" required value={{address2}}>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputCity">City</label>
+                        <input type="text" class="form-control" name="city" id="inputCity" required value={{city}}>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputZip">State</label>
+                        <input type="text" class="form-control" name="state" id="inputZip" required value={{state}}>
+                    </div>
+                    
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputCity">Mobile</label>
+                        <input type="text" class="form-control" name="mobile" id="inputCity" required value={{mobile}}>
+                    </div>
+                    
+                    <div class="form-group col-md-6">
+                        <label for="inputZip">ZIP</label>
+                        <input type="text" class="form-control" name="zip" id="inputZip" placeholder="11111" required value={{zip}}>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail">Email</label>
+                    <input type="email" readonly class="form-control-plaintext border border-warning rounded" name="email" id="inputEmail" placeholder="name@example.com" required value={{email}}>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputUsername">Username</label>
+                        <input type="text" readonly class="form-control-plaintext border border-warning rounded" name="user" id="inputUsername" placeholder="ahmed" required value={{user}}>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword">Password</label>
+                        <input type="password" class="form-control" name="pass" id="inputPassword" required value={{pass}}>
+                    </div>
+                </div>
+
+                <button type="submit" name = "btnsave" class="btn btn-primary">Save</button>
+                <div class="mb-3 mt-3">
+                <a  href="{% url 'password_change'  %}"><strong style="color:brown"> Change Password </strong></a>
+                </div>
+        {% else %}
+              <h4 clas="alert alert-danger"> You must be <a href="{% url 'signin' %}" class="tex-dark" style="color:brown"> logged in </a></h4>
+        {% endif %}
+        </form>
+
+
+    </div>
+
+   {% endblock content %} 
+    
+</body>
